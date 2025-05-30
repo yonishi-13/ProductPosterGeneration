@@ -1,0 +1,117 @@
+/* Optional: Add this to index.html <head> or import via JS
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+*/
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #f0f4ff, #fef6ff);
+  color: #333;
+}
+
+.app-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.form-box {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  transition: transform 0.2s ease;
+}
+
+.form-box:hover {
+  transform: translateY(-2px);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3b3b98;
+  margin-bottom: 1.8rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.file-group {
+  margin-bottom: 1rem;
+}
+
+.file-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+input[type="file"] {
+  font-size: 0.95rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+  transform: scale(1.01);
+}
+
+.submit-button:disabled {
+  background: #c7d2fe;
+  cursor: not-allowed;
+}
+
+.poster-preview {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.poster-preview h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.poster-image {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.poster-image:hover {
+  transform: scale(1.01);
+}
