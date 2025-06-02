@@ -78,4 +78,59 @@ The application is evolving into a **Planning + Rendering** framework for struct
 - Better spatial reasoning and content placement
 - Improved layout diversity and branding fidelity
 
-These features are currently in the **prototyp
+These features are currently in the **prototyping phase.**
+
+---
+ 
+## ⚙️ Installation & Setup
+### 1. 📦 Backend (Python + FastAPI)
+
+#### Install dependencies
+pip install -r requirements.txt
+
+#### Set Hugging Face Token
+You must authenticate with Hugging Face to access CompVis/stable-diffusion-v1-4.
+Go to the [`auth_token.py`](./backend/auth_token.py)
+- Go the Hugging Face website.
+- Create an account.
+- Go to Profile Settings
+- Click on **Access Tokens**
+- Save the Token and copy it
+- Paste the auth_token to the auth_token.py file.
+
+#### Run the FastAPI Server
+cd backend
+uvicorn main:app --reload
+
+### 2. 💻 Frontend (Next.js)
+
+#### Navigate to the frontend directory
+cd frontend
+
+#### Install Next.js (React + Vite alternative)
+npm install
+
+#### Start the server
+npm start
+
+Make sure the backend is running on http://localhost:8000 and frontend is configured to point to this backend.
+
+---
+
+## 📚 References
+
+- [IJCAI 2022: Layout-Aware Design via Planning](https://www.ijcai.org/proceedings/2022/0692.pdf)
+- [Diffusion-Based Document Design (2023)](https://arxiv.org/html/2312.08822v2#S)
+- [FastAPI: Request Body Tutorial](https://fastapi.tiangolo.com/tutorial/body/#import-pydantics-basemodel)
+- [FastAPI Tutorial (YouTube)](https://www.youtube.com/watch?v=3l16wCsDglU&t=1912s)
+- [Stable Diffusion v1.4 on Hugging Face](http://huggingface.co/CompVis/stable-diffusion-v1-4)
+
+---
+
+## Contributor
+
+- **yonishi-13** – [GitHub](https://github.com/yonishi-13)
+
+---
+
+
