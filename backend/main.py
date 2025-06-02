@@ -2,14 +2,13 @@ from fastapi import FastAPI, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware 
 from io import BytesIO
 import base64
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import torch
 from diffusers import StableDiffusionPipeline
-import os
 
 app = FastAPI()
 
-# CORS setup for frontend communication
+# CORS setup
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -18,9 +17,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# Load the Stable Diffusion model (recommended to run on GPU)
 model_id = "CompVis/stable-diffusion-v1-4"
-
 pipe = StableDiffusionPipeline.from_pretrained(
     model_id,
     torch_dtype=torch.float32,
@@ -36,30 +33,47 @@ async def generate(
     bg_image: UploadFile = Form(...),
     image_size: str = Form(...)
 ):
-    # Parse image size (e.g. "512x512")
+    # Parse image size
     try:
         width, height = map(int, image_size.lower().split("x"))
     except:
-        width, height = 512, 512  # Default fallback
+        width, height = 512, 512
 
-    # Load and analyze brand logo and background
-    logo_img = Image.open(BytesIO(await brand_logo.read())).convert("RGBA")
-    bg_img = Image.open(BytesIO(await bg_image.read())).convert("RGBA")
+    # Load images
+    logo = Image.open(BytesIO(await brand_logo.read())).convert("RGBA")
+    background = Image.open(BytesIO(await bg_image.read())).convert("RGBA")
+    background = background.resize((width, height))
 
-    # Generate a simple descriptive prompt
     prompt = (
-        f"A high-quality promotional poster for '{brand_text}', "
-        "featuring a professional layout with logo and background, "
-        "modern typography, centered branding, studio lighting, clean and elegant design"
+        f"Modern and clean promotional poster for {brand_text}, "
+        f"professional layout, brand elements, minimal design, studio lighting, high quality"
     )
 
-    # Generate poster with Stable Diffusion
     with torch.no_grad():
-        image = pipe(prompt, height=height, width=width, guidance_scale=8.5).images[0]
+        gen_image = pipe(prompt, height=height, width=width, guidance_scale=8.5).images[0]
+    gen_image = gen_image.convert("RGBA")
+
+    # Composite the background image
+    combined = Image.alpha_composite(gen_image, background)
+
+    # Resize and paste logo
+    logo_ratio = 0.2
+    logo_width = int(width * logo_ratio)
+    logo.thumbnail((logo_width, logo_width), Image.ANTIALIAS)
+    logo_position = (width - logo.size[0] - 20, height - logo.size[1] - 20)
+    combined.paste(logo, logo_position, logo
+                   
+    draw = ImageDraw.Draw(combined)
+    try:
+        font = ImageFont.truetype("arial.ttf", size=32)
+    except:
+        font = ImageFont.load_default()
+
+    draw.text((30, 30), brand_text, font=font, fill=(255, 255, 255, 255))
 
     # Convert output to base64
     buffer = BytesIO()
-    image.save(buffer, format="PNG")
-    imgstr = base64.b64encode(buffer.getvalue()).decode("utf-8")
+    combined.save(buffer, format="PNG")
+    img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
-    return {"image_base64": imgstr}
+    return {"image_base64": img_str}
