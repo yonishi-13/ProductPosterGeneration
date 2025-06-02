@@ -1,6 +1,6 @@
 # 🖼️ Product Poster Generator
 
-This repository contains a client-server web application for generating brand-specific posters using generative AI and layout-aware rendering. The system is designed with a modular architecture to enable interpretable and controllable image synthesis tailored for real-world marketing.
+This repository contains a client-server web application for generating brand-specific posters using generative AI and basic layout logic. The system is designed with a modular architecture to enable interpretable and controllable image synthesis tailored for real-world marketing applications.
 
 ---
 
@@ -22,6 +22,10 @@ The backend is responsible for:
 - Image preprocessing and layout logic
 - Rendering brand assets and text
 - Image generation using a modular machine learning pipeline
+
+**Note:**  
+No external layout generation framework (e.g., PlanNet, LayoutTransformer) is used at this stage.  
+All layout-related decisions (e.g., positioning of logo and text) are handled through **direct logic coded in [`main.py`](./main.py)**.
 
 ---
 
@@ -47,13 +51,12 @@ The `StableDiffusionPipeline` generated posters based only on the text prompt �
 
 ### 1. Structured Input Handling
 - Accepts **logo**, **background image**, **brand text**, and **image dimensions** as separate inputs
-- Each input is processed independently for layout generation
+- Inputs are parsed and processed in `main.py` without an external layout engine
 
-### 2. Intermediate Layout Generation
-- Introduces a **rule-based layout generator**
-- Computes bounding boxes for text and logo:
-  - Ensures **non-overlapping**, **visually balanced** placements
-  - Enables spatial consistency and interpretability
+### 2. Direct Layout Logic in `main.py`
+- A simple **rule-based layout logic** has been implemented in `main.py`
+- Calculates bounding boxes for the logo and text manually
+- Ensures **non-overlapping**, **visually balanced** placements for initial prototyping
 
 ### 3. Integrated Asset Rendering
 - Uses `Pillow` and `OpenCV` to process and render:
@@ -69,13 +72,13 @@ The `StableDiffusionPipeline` generated posters based only on the text prompt �
 
 ## 🚀 Planned Enhancements (Ongoing Research)
 
-The application is evolving into a **Planning + Rendering** framework for structured generative design. Current focus areas include:
-- Modular layout planning
-- Interpretable visual encoding
-- Controllable generative rendering
-- Layout diversity & brand consistency
+The application is evolving into a **Planning + Rendering** framework for structured generative design. Future plans include:
+- Integration of layout-aware models like **PlanNet**
+- Interpretable and modular layout-to-image pipelines
+- Better spatial reasoning and content placement
+- Improved layout diversity and branding fidelity
 
-These features are in the **prototyping and evaluation phase** with the goal of scaling to real-world marketing use cases.
+These features are currently in the **prototyping phase**.
 
 ---
 
@@ -94,4 +97,3 @@ These features are in the **prototyping and evaluation phase** with the goal of 
 - **yonishi-13** – [GitHub](https://github.com/yonishi-13)
 
 ---
-
