@@ -78,22 +78,4 @@ The application is evolving into a **Planning + Rendering** framework for struct
 - Better spatial reasoning and content placement
 - Improved layout diversity and branding fidelity
 
-These features are currently in the **prototyping phase**.
-
----
-
-## 📚 References
-
-- [IJCAI 2022: Layout-Aware Design via Planning](https://www.ijcai.org/proceedings/2022/0692.pdf)
-- [Diffusion-Based Document Design (2023)](https://arxiv.org/html/2312.08822v2#S)
-- [FastAPI: Request Body Tutorial](https://fastapi.tiangolo.com/tutorial/body/#import-pydantics-basemodel)
-- [FastAPI Tutorial (YouTube)](https://www.youtube.com/watch?v=3l16wCsDglU&t=1912s)
-- [Stable Diffusion v1.4 on Hugging Face](http://huggingface.co/CompVis/stable-diffusion-v1-4)
-
----
-
-## ✨ Contributors
-
-- **yonishi-13** – [GitHub](https://github.com/yonishi-13)
-
----
+These features are currently in the **prototyp
