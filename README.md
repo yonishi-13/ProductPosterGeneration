@@ -25,7 +25,7 @@ The backend is responsible for:
 
 **Note:**  
 No external layout generation framework (e.g., PlanNet, LayoutTransformer) is used at this stage.  
-All layout-related decisions (e.g., positioning of logo and text) are handled through **direct logic coded in [`backend/main.py`](./main.py)**.
+All layout-related decisions (e.g., positioning of logo and text) are handled through **direct logic coded in [`main.py`](./backend/main.py)**.
 
 ---
 
